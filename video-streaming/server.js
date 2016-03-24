@@ -9,20 +9,30 @@ app.set('view engine', 'ejs');
 app.engine('.html', ejs.renderFile);
 
 app.get('/',function(req,res){
-  var videos={};
+  function videoFilter(name){
+    if (name.indexOf('.mp4')<0)
+      return false;
+    return true;
+  }
+  var videos;
   fs.readdir(path.resolve(__dirname,'videos/'), function(err, data){
     if (err) throw err;
-    videos = data
+    videos = data.filter(videoFilter)
     res.render('index.html', {videos: videos});
   });
 })
 
 app.get('/stream/:id',function(req,res){
+  function vttFilter(name){
+    if (name.indexOf('.vtt')<0)
+      return false;
+    return true;
+  }
   var videoId=req.params.id;
   var hostUrl = req.protocol + '://' + req.get('host');
   fs.readdir(path.resolve(__dirname,'vtts/'), function(err, data){
     if (err) throw err;
-    vtts = data
+    vtts = data.filter(vttFilter);
     res.render('player.html', {hostUrl: hostUrl, videoId: videoId, vtts: vtts});
   });
 })
