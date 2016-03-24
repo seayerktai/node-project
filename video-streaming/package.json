@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "ejs": "^2.4.1",
+    "express": "^4.13.4"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "video-streaming",
+  "version": "1.0.0",
+  "main": "server.js",
+  "dependencies": {
+    "ejs": "^2.4.1",
+    "express": "^4.13.4"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

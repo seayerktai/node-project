@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<body onload="insertVideoTable()">
+		<h1>Movies List</h1>
+		<table id="videoTable" width="100%">
+		</table>
+	
+		<script>
+		function insertVideoTable() {
+			var videos = JSON.parse('<%- JSON.stringify(videos) %>');
+			var table = document.getElementById("videoTable");
+			var i;
+			for(i=0 ; i<Math.floor(videos.length/4)*4; i+=4){
+			    var row = table.insertRow(0);
+			    var cell1 = row.insertCell(0);
+			    var cell2 = row.insertCell(1);
+			    var cell3 = row.insertCell(2);
+			    var cell4 = row.insertCell(3);
+			    cell1.innerHTML = videos[i];
+			    cell1.innerHTML ='<a href="stream/' + videos[i] + '">' + videos[i];
+
+			    cell2.innerHTML = videos[i+1];
+			    cell2.innerHTML ='<a href="stream/' + videos[i+1] + '">' + videos[i+1];
+
+			    cell3.innerHTML = videos[i+2];
+			    cell3.innerHTML ='<a href="stream/' + videos[i+2] + '">' + videos[i+2];
+
+			    cell4.innerHTML = videos[i+3];
+			    cell4.innerHTML ='<a href="stream/' + videos[i+3] + '">' + videos[i+3];
+			}
+			var row = table.insertRow(0);
+			for(i; i<videos.length; i++){
+			    var cell1 = row.insertCell(0);
+			    cell1.innerHTML ='<a href="stream/' + videos[i] + '">' + videos[i];
+			}
+		}
+		</script>
+
+	</body>
+</html>
+
