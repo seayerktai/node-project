@@ -2,6 +2,7 @@ var express = require('express'),
    url = require("url"),
    fs = require("fs"),
    ejs = require('ejs'),
+   formidable = require('formidable'),
   path = require("path");
 
 var app = express();
@@ -77,5 +78,30 @@ app.get('/vtt/:id',function(req,res){
         }).on("error", function(err) {
           res.end(err);
         });
+});
+
+app.post('/uploadvtt',function(req,res){
+  var dir = './tmp';
+
+  if (!fs.existsSync(dir)){
+      fs.mkdirSync(dir);
+  }
+   var form = new formidable.IncomingForm();
+  form.uploadDir = dir;
+  form.encoding = 'binary';
+
+  form.addListener('file', function(name, file) {
+    // do something with uploaded file
+    fs.rename(path.resolve(__dirname,file.path),path.resolve(__dirname,'vtts/'+file.name),function(){
+      res.send(file.name);
+    })
+  });
+
+
+  form.parse(req, function(err, fields, files) {
+    if (err) {
+      console.log(err);
+    }
+  });
 });
 app.listen(4000);
