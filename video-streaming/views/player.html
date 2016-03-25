@@ -24,9 +24,13 @@
 			    var cell3 = row.insertCell(2);
 			    var cell4 = row.insertCell(3);
 			    cell1.innerHTML = vtts[i];
+			    cell1.setAttribute('onclick', "insertSub('"+ vtts[i]+"')");
 			    cell2.innerHTML = vtts[i+1];
+			    cell2.setAttribute('onclick', "insertSub('"+ vtts[i+1]+"')");
 			    cell3.innerHTML = vtts[i+2];
+			    cell3.setAttribute('onclick', "insertSub('"+ vtts[i+2]+"')");
 			    cell4.innerHTML = vtts[i+3];
+			    cell4.setAttribute('onclick', "insertSub('"+ vtts[i+3]+"')");
 			}
 			var row = table.insertRow(0);
 			for(i; i<vtts.length; i++){

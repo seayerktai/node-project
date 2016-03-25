@@ -72,6 +72,9 @@ app.get('/video/:id', function(req, res) {
 
 app.get('/vtt/:id',function(req,res){
 	var file = path.resolve(__dirname,'vtts/'+req.params.id);
+  res.writeHead(206, {
+        "Content-Type": "text/vtt"
+      });
 	var stream = fs.createReadStream(file)
         .on("open", function() {
           stream.pipe(res);
